@@ -8,12 +8,12 @@
 			"program": "${workspaceRoot}/node_modules/ts-node/dist/_bin.js",
 			"stopOnEntry": false,
 			"args": [
-				"index.ts",
-				"delete",
+				"src/index.ts",
+				"add",
 				"--list",
 				"38E3EC1C-1BAD-42FA-A60A-2A6C1E49CFBA",
-				"--id",
-				"ce38389e-a91d-4df4-b924-0b1956b4640e"
+				"--url",
+				"https://52da06ac.ngrok.io/api/HttpTriggerTS"
 			],
 			"cwd": "${workspaceRoot}",
 			"protocol": "inspector"

@@ -107,7 +107,8 @@ export class SubscriptionManager {
 
     private getDefaultExpiration(): string {
         let now = new Date();
-        now.setMonth(now.getMonth() + 6);
+        now.setMonth(now.getMonth() + 5);
+        now.setHours(24 * 25);
         return now.toISOString();
     }
 
