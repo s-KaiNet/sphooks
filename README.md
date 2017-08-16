@@ -7,6 +7,8 @@
 
 Built with Node.JS, Typescript, [sp-pnp-js](https://github.com/SharePoint/PnP-JS-Core) and [node-sp-auth](https://github.com/s-KaiNet/node-sp-auth) 
 
+
+
 ## Prerequisites
  - Node.JS >= 6.x
 
@@ -90,3 +92,5 @@ Sample
 ```
 sphooks deleteAll --list "sites/dev/Shared Documents" 
 ```
+## Showcase
+![sphooks](sphooks.gif)
