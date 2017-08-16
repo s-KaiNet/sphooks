@@ -1,0 +1,50 @@
+{
+  "name": "sphooks",
+  "version": "0.0.1",
+  "description": "Cross-platform CLI for managing SharePoint list web hooks",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "tsc -p .",
+    "build:dev": "tsc -p . -w",
+    "prepublish": "rimraf -- lib && npm run build",
+    "prepublishOnly": "rimraf -- lib && npm run build"
+  },
+  "bin": {
+    "sphooks": "./lib/index.js"
+  },
+  "keywords": [
+    "sharepoint",
+    "authentication",
+    "nodejs",
+    "web hooks"
+  ],
+  "bugs": {
+    "url": "https://github.com/s-KaiNet/sphooks/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/s-KaiNet/sphooks.git"
+  },
+  "homepage": "https://github.com/s-KaiNet/sphooks",
+  "author": "Sergei Sergeev <sergeev.srg@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "inquirer": "^3.2.1",
+    "minimist": "^1.2.0",
+    "node-pnp-js": "^0.1.0",
+    "node-sp-auth": "^2.1.1",
+    "preferences": "^0.2.1",
+    "sp-pnp-js": "^2.0.7"
+  },
+  "devDependencies": {
+    "@types/chalk": "^0.4.31",
+    "@types/inquirer": "0.0.35",
+    "@types/minimist": "^1.2.0",
+    "rimraf": "^2.6.1",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.6.0",
+    "tslint-config-standard": "^6.0.1",
+    "typescript": "^2.4.2"
+  }
+}
