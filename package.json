@@ -1,6 +1,6 @@
 {
   "name": "sphooks",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Cross-platform CLI for managing SharePoint list web hooks",
   "main": "./lib/index.js",
   "scripts": {

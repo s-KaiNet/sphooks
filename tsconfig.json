@@ -6,7 +6,8 @@
     "moduleResolution": "node",
     "declaration": true,
     "noImplicitAny": true,
-    "outDir": "lib"
+    "outDir": "lib",
+    "newLine": "LF"
   },
   "include": [
     "src"
