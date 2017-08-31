@@ -16,6 +16,7 @@ Built with Node.JS, Typescript, [sp-pnp-js](https://github.com/SharePoint/PnP-JS
 ## Installation
 
 ```bash
+npm install electron -g # electron needed for an interactive web login
 npm install sphooks -g
 ```
 
