@@ -1,6 +1,6 @@
 {
   "name": "sphooks",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Cross-platform CLI for managing SharePoint list web hooks",
   "main": "./lib/index.js",
   "scripts": {
@@ -35,7 +35,7 @@
     "node-pnp-js": "^0.1.0",
     "node-sp-auth": "^2.1.1",
     "preferences": "^0.2.1",
-    "sp-pnp-js": "^2.0.7"
+    "sp-pnp-js": "^3.0.1"
   },
   "devDependencies": {
     "@types/chalk": "^0.4.31",
