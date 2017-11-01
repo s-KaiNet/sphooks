@@ -1,26 +1,19 @@
 import * as pnp from 'sp-pnp-js';
 import * as chalk from 'chalk';
 import { List } from 'sp-pnp-js';
+import { IViewCommandOptions, IAddCommandOptions, IUpdateCommandOptions, IDeleteCommandOptions, IListCommandOption } from './params/index';
 
 export class SubscriptionManager {
 
-    constructor(private args: any) { }
-
-    public async viewSubscriptions(verbose = true): Promise<any> {
-        let listId = this.args['list'];
-        let id = this.args['id'];
-
-        if (!listId) {
-            throw new Error(`Missing required parameter '--list'`);
-        }
-
-        let list = this.getList(listId);
+    public async viewSubscriptions(opts: IViewCommandOptions, verbose = true): Promise<any> {
+        let list = this.getList(opts.list);
         let data: any;
-        if (id) {
-            data = await list.subscriptions.getById(id).get();
+        if (opts.id) {
+            data = await list.subscriptions.getById(opts.id).get();
         } else {
             data = await list.subscriptions.get();
         }
+
         if (verbose) {
             console.log('Subscription data received:');
             console.log(data);
@@ -29,80 +22,47 @@ export class SubscriptionManager {
         return data;
     }
 
-    public async addSubscription(): Promise<any> {
-        let listId = this.args['list'];
-        let url = this.args['url'];
-        let expired = this.args['exp'];
-
-        if (!listId) {
-            throw new Error(`Missing required parameter '--list'`);
+    public async addSubscription(opts: IAddCommandOptions): Promise<any> {
+        if (!opts.exp) {
+            opts.exp = this.getDefaultExpiration();
         }
 
-        if (!url) {
-            throw new Error(`Missing required parameter '--url'`);
-        }
-
-        if (!expired) {
-            expired = this.getDefaultExpiration();
-        }
-
-        let list = this.getList(listId);
-        let data = await list.subscriptions.add(url, expired);
+        let list = this.getList(opts.list);
+        let data = await list.subscriptions.add(opts.url, opts.exp);
         console.log('Subscription added:');
         console.log(data);
 
         return data;
-
     }
 
-    public async deleteSubscription(id?: string): Promise<any> {
-        let listId = this.args['list'];
-        let subscriptionId = this.args['id'] || id;
-
-        if (!listId) {
-            throw new Error(`Missing required parameter '--list'`);
-        }
-
-        if (!subscriptionId) {
-            throw new Error(`Missing required parameter '--id'`);
-        }
-        let list = this.getList(listId);
-        await list.subscriptions.getById(subscriptionId).delete();
-        console.log(`Subscription ${subscriptionId} deleted`);
+    public async deleteSubscription(opts: IDeleteCommandOptions): Promise<any> {
+        let list = this.getList(opts.list);
+        await list.subscriptions.getById(opts.id).delete();
+        console.log(`Subscription ${opts.id} deleted`);
     }
 
-    public async deleteAllSubscriptions(): Promise<any> {
+    public async deleteAllSubscriptions(opts: IListCommandOption): Promise<any> {
 
-        let subscriptions = await this.viewSubscriptions(false);
+        let subscriptions = await this.viewSubscriptions(opts, false);
         let deletePromises: any[] = [];
         subscriptions.forEach((subscription: any) => {
-            deletePromises.push(this.deleteSubscription(subscription.id));
+            deletePromises.push(this.deleteSubscription({
+                id: subscription.id,
+                list: opts.list
+            }));
         });
 
         return Promise.all(deletePromises);
     }
 
-    public async updateSubscription(): Promise<any> {
-
-        let listId = this.args['list'];
-        let expired = this.args['exp'];
-        let subscriptionId = this.args['id'];
-
-        if (!listId) {
-            throw new Error(`Missing required parameter '--list'`);
+    public async updateSubscription(opts: IUpdateCommandOptions): Promise<any> {
+        if (!opts.exp) {
+            opts.exp = this.getDefaultExpiration();
         }
+        let list = this.getList(opts.list);
+        await list.subscriptions.getById(opts.id).update(opts.exp);
 
-        if (!subscriptionId) {
-            throw new Error(`Missing required parameter '--id'`);
-        }
-
-        if (!expired) {
-            expired = this.getDefaultExpiration();
-        }
-        let list = this.getList(listId);
-        await list.subscriptions.getById(subscriptionId).update(expired);
-
-        console.log(`Subscription ${subscriptionId} updated`);
+        console.log(`Subscription ${opts.id} updated`);
     }
 
     private getDefaultExpiration(): string {

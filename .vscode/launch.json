@@ -9,11 +9,9 @@
 			"stopOnEntry": false,
 			"args": [
 				"src/index.ts",
-				"add",
+				"view",
 				"--list",
-				"38E3EC1C-1BAD-42FA-A60A-2A6C1E49CFBA",
-				"--url",
-				"https://52da06ac.ngrok.io/api/HttpTriggerTS"
+				"sites/hr/lists/qa"
 			],
 			"cwd": "${workspaceRoot}",
 			"protocol": "inspector"
